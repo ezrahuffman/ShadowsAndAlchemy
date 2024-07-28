@@ -15,6 +15,13 @@ public class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
 
         deathAnimationHash = Animator.StringToHash(deathAnimationName);
+
+        OverridableStart();
+    }
+
+    protected virtual void OverridableStart()
+    {
+
     }
 
     public void TakeDmg(int damage)
