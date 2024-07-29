@@ -1,9 +1,9 @@
-using System;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
     public static GameController instance;
+    public bool playerCaught { private set; get; }
 
     private void Awake()
     {
@@ -28,5 +28,13 @@ public class GameController : MonoBehaviour
     internal void OnTargetDie()
     {
         Debug.Log("Game over! Show the winning end screen.");
+    }
+
+    internal void OnPlayerCaught()
+    {
+        Debug.Log("Player caught. Game Over");
+        playerCaught = true;
+        
+        //TODO: Show Game Over Screen
     }
 }

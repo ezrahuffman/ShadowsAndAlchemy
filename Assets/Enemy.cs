@@ -37,7 +37,10 @@ public class Enemy : MonoBehaviour
             p.onGoToNextPathPoint += OnGoToNextPathPoint;
         }
 
-        meshAgent.destination = path[0].transform.position;
+        if (path.Count > 0)
+        {
+            meshAgent.destination = path[0].transform.position;
+        }
     }
 
     protected void OnGoToNextPathPoint(AgentPathPoint point)

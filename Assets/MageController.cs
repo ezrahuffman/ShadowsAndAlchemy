@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -33,6 +34,8 @@ public class MageController : MonoBehaviour
     Weapon _weaponToBreak;
     bool usingDoor;
 
+    HashSet<CustomLight> customLights;
+
     //[SerializeField] InputAction fireDirInput;
     //[SerializeField] InputAction fireInput;
     //[SerializeField] InputAction interactInput;
@@ -56,6 +59,8 @@ public class MageController : MonoBehaviour
         currentAnimHash = idleAnimationHash;
 
         _currEnergy = maxEnergy;
+
+        customLights = new HashSet<CustomLight>();
     }
 
     private void UseDoorInput_started(InputAction.CallbackContext context)
@@ -307,5 +312,20 @@ public class MageController : MonoBehaviour
             BreakWeaponAfterAnimation();
             _breakOnFinishAttack = false;
         }
+    }
+
+    internal bool IsVisable()
+    {
+        return customLights.Count != 0;
+    }
+
+    public void AddLight(CustomLight light)
+    {
+       customLights.Add(light);
+    }
+
+    public void RemoveLight(CustomLight light)
+    {
+        customLights.Remove(light);
     }
 }
