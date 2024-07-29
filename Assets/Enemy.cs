@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -6,8 +8,15 @@ public class Enemy : MonoBehaviour
     HealthSystem healthSystem;
     [SerializeField] int maxHealth;
     [SerializeField] string deathAnimationName;
+    [SerializeField] List<AgentPathPoint> path;
+    [SerializeField] float movementSpeed;
+    protected NavMeshAgent meshAgent;
+
+
     int deathAnimationHash;
     Animator animator;
+    int currentPathPointIndex;
+
     private void Start()
     {
         healthSystem = new HealthSystem(maxHealth);
@@ -17,6 +26,30 @@ public class Enemy : MonoBehaviour
         deathAnimationHash = Animator.StringToHash(deathAnimationName);
 
         OverridableStart();
+
+        currentPathPointIndex = 0;
+        meshAgent = GetComponent<NavMeshAgent>();
+        meshAgent.speed = movementSpeed;
+
+        foreach (AgentPathPoint p in path)
+        {
+            p.SetAgent(this);
+            p.onGoToNextPathPoint += OnGoToNextPathPoint;
+        }
+
+        meshAgent.destination = path[0].transform.position;
+    }
+
+    protected void OnGoToNextPathPoint(AgentPathPoint point)
+    {
+
+        if (path[currentPathPointIndex] != point)
+        {
+            return;
+        }
+
+        currentPathPointIndex = (currentPathPointIndex + 1) % path.Count;
+        meshAgent.destination = path[currentPathPointIndex].transform.position;
     }
 
     protected virtual void OverridableStart()

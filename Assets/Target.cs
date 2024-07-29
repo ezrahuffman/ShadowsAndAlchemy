@@ -3,14 +3,14 @@ using UnityEngine.AI;
 
 public class Target : Enemy
 {
-    NavMeshAgent meshAgent;
+    //NavMeshAgent meshAgent;
     [SerializeField] Transform target;
 
     protected override void OverridableStart()
     {
         base.OverridableStart();
-        meshAgent = GetComponent<NavMeshAgent>();
-        MoveToPoint();
+        //meshAgent = GetComponent<NavMeshAgent>();
+        //MoveToPoint();
     }
     protected override void OnDie()
     {
