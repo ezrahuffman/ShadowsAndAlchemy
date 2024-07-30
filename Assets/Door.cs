@@ -13,6 +13,8 @@ public class Door : MonoBehaviour
     GameController gameController;
 
     [SerializeField] GameObject outsideLight;
+
+    [SerializeField] bool lightToDark;
     
 
 
@@ -79,13 +81,19 @@ public class Door : MonoBehaviour
         if (isSideOne)
         {
             Debug.Log("go inside");
-            outsideLight.SetActive(false);
+            if (lightToDark)
+            {
+                outsideLight.SetActive(false);
+            }
             mage.Teleport(side_2.position);
         }
         else
         {
             Debug.Log("go outside");
-            outsideLight.SetActive(true);
+            if (lightToDark)
+            {
+                outsideLight.SetActive(true);
+            }
             mage.Teleport(side_1.position);
         }
     }
