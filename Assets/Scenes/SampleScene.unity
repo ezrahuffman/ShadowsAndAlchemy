@@ -10699,7 +10699,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7121590728061320882, guid: 6a6c3409f0bf2e24da359ece25ef1a86, type: 3}
       propertyPath: debug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7121590728061320882, guid: 6a6c3409f0bf2e24da359ece25ef1a86, type: 3}
       propertyPath: excludeBehind

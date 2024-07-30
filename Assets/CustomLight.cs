@@ -39,7 +39,7 @@ public class CustomLight : MonoBehaviour
                 added = true;
                 opt = 2;
             }
-            else if (dot < 0 && prevAdded) { }
+            else if (dot < 0 && prevAdded)
             {
                 playerTrans.GetComponent<MageController>().RemoveLight(this);
                 added = false;
