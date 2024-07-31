@@ -20,7 +20,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] List<AudioClip> stabSounds;
     [SerializeField] AudioSource audioSource;
     int prevStabSoundIndex;
-    bool firstPoint;
 
     private void Start()
     {
@@ -53,7 +52,7 @@ public class Enemy : MonoBehaviour
     protected void OnGoToNextPathPoint(AgentPathPoint point)
     {
 
-        if (path[currentPathPointIndex] != point || !firstPoint)
+        if (path[currentPathPointIndex] != point)
         {
             firstPoint = true;
             return;
