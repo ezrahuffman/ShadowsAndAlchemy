@@ -6,6 +6,7 @@ public class Guard : Enemy
     [SerializeField] SphereCollider sphereCollider;
     [SerializeField] float lookAngle;
     [SerializeField] float lookRange;
+    [SerializeField] GameObject visionIndicator;
     MageController mageController;
     bool playerNearby;
    
@@ -116,5 +117,12 @@ public class Guard : Enemy
     void CatchPlayer()
     {
         gameController.OnPlayerCaught();
+    }
+
+    protected override void OnDie()
+    {
+        base.OnDie();
+
+        visionIndicator?.SetActive(false);
     }
 }

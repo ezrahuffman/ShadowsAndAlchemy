@@ -21,8 +21,30 @@ public class Enemy : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     int prevStabSoundIndex;
 
+    public bool canMove { 
+        get { return meshAgent.speed > 0f; }
+        set {
+            if (meshAgent == null)
+            {
+                return;
+            }
+            if (value)
+            {
+                // can move
+                
+                meshAgent.speed = movementSpeed;
+            }
+            else
+            {
+                meshAgent.speed = 0f;
+            }
+        } 
+    }
+    public bool isDead { get; private set; }
+
     private void Start()
     {
+        canMove = true;
         prevStabSoundIndex = -1; // allow any stab sound to be played first
 
         healthSystem = new HealthSystem(maxHealth);
@@ -90,6 +112,10 @@ public class Enemy : MonoBehaviour
     protected virtual void OnDie()
     {
         Debug.Log($"{gameObject.name} has died");
+
+        isDead = true;
+
+        canMove = false;
 
         // Play animation
         animator.Play(deathAnimationHash);

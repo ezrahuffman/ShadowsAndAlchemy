@@ -357,6 +357,8 @@ public class MageController : MonoBehaviour
             BreakWeaponAfterAnimation();
             _breakOnFinishAttack = false;
         }
+
+        gameController?.UnPauseEnemies();
     }
 
     internal bool IsVisable()

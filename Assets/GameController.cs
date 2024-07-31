@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -9,6 +10,8 @@ public class GameController : MonoBehaviour
     bool _gamePaused;
     [SerializeField] GameObject _pauseMenu;
     [SerializeField] EndMenuController endMenuController;
+
+    Enemy[] enemies;
 
     private void Awake()
     {
@@ -22,6 +25,8 @@ public class GameController : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        enemies = FindObjectsOfType<Enemy>();
     }
 
     // Show the "Press to use" prompt to the user
@@ -48,7 +53,21 @@ public class GameController : MonoBehaviour
 
     public void PauseEnemies()
     {
-        Debug.Log("Pause Enemies Motion");
+        foreach (Enemy enemy in enemies)
+        {
+                enemy.canMove = false;
+        }
+    }
+
+    public void UnPauseEnemies()
+    {
+        foreach (Enemy enemy in enemies)
+        {
+            if (!enemy.isDead)
+            {
+                enemy.canMove = true;
+            }
+        }
     }
 
     internal void PauseGame()
