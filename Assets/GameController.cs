@@ -62,7 +62,10 @@ public class GameController : MonoBehaviour
     internal void TogglePause()
     {
         _gamePaused = !_gamePaused;
-        _pauseMenu.SetActive(_gamePaused);
+        if (_pauseMenu != null)
+        {
+            _pauseMenu?.SetActive(_gamePaused);
+        }
         if (_gamePaused)
         {
             PauseGame();
