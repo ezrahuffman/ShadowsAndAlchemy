@@ -12,6 +12,7 @@ public class BasicButton : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponentInChildren<Animator>();
+        _animator.updateMode = AnimatorUpdateMode.UnscaledTime;
     }
 
     public void OnPointerEnter()
@@ -21,7 +22,6 @@ public class BasicButton : MonoBehaviour
 
         _animator.SetBool("PointerOver", true);
 
-        Debug.Log("play button shine");
         // Play shine animation
         _animator.Play("ButtonShine");
 

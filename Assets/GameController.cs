@@ -6,6 +6,9 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     public bool playerCaught { private set; get; }
 
+    bool _gamePaused;
+    [SerializeField] GameObject _pauseMenu;
+
     private void Awake()
     {
         if (instance == null)
@@ -41,6 +44,32 @@ public class GameController : MonoBehaviour
 
     public void PauseEnemies()
     {
-        throw new NotImplementedException();
+        Debug.Log("Pause Enemies Motion");
+    }
+
+    internal void PauseGame()
+    {
+        Time.timeScale = 0;
+        _gamePaused = true;
+    }
+
+    internal void ResumeGame()
+    {
+        Time.timeScale = 1;
+        _gamePaused = false;
+    }
+
+    internal void TogglePause()
+    {
+        _gamePaused = !_gamePaused;
+        _pauseMenu.SetActive(_gamePaused);
+        if (_gamePaused)
+        {
+            PauseGame();
+        }
+        else
+        {
+            ResumeGame();
+        }
     }
 }

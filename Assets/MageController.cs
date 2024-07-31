@@ -12,6 +12,7 @@ public class MageController : MonoBehaviour
     [SerializeField] InputAction transformInput;
     [SerializeField] InputAction useDoorInput;
     [SerializeField] InputAction attackInput;
+    [SerializeField] InputAction pauseInput;
 
     [SerializeField] Animator animator;
     [SerializeField] GameObject mage;
@@ -48,10 +49,12 @@ public class MageController : MonoBehaviour
         transformInput.Enable();
         useDoorInput.Enable(); 
         attackInput.Enable();
+        pauseInput.Enable();
 
         transformInput.started += TransformInput_started;
         useDoorInput.started += UseDoorInput_started;
         attackInput.started += AttackInput_started;
+        pauseInput.started += PauseInput_started;
 
         runAnimationHash = Animator.StringToHash("Running_A");
         idleAnimationHash =  Animator.StringToHash("Idle");
@@ -61,6 +64,11 @@ public class MageController : MonoBehaviour
         _currEnergy = maxEnergy;
 
         customLights = new HashSet<CustomLight>();
+    }
+
+    private void PauseInput_started(InputAction.CallbackContext context)
+    {
+        gameController.TogglePause();
     }
 
     private void Start()
