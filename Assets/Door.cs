@@ -49,7 +49,7 @@ public class Door : MonoBehaviour
         {
             if (PlayerIsLookingAtObject(Player))
             {
-                gameController.PromptUse();
+                gameController.PromptUse("Press 'E' to use door");
                 canUse = true;
             }
             else

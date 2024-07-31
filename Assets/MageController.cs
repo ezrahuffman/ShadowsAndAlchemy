@@ -327,6 +327,7 @@ public class MageController : MonoBehaviour
             {
                 currentWeapon.onBreak -= OnBreakWeaponBreak;
             }
+            currentWeapon.gameObject.SetActive(false);
             currentWeapon = null;
         }
     }

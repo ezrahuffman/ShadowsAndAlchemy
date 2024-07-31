@@ -27,6 +27,33 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &-8642636970309439926
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 1H_Melee_Attack_Slice_Diagonal
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours:
+  - {fileID: 9146848513298748769}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7624655660056751624, guid: 18ffadfa311fb6f40acb8b390c698912, type: 3}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &-8062185217622702512
 AnimatorState:
   serializedVersion: 6
@@ -67,10 +94,13 @@ AnimatorStateMachine:
     m_Position: {x: 420.62094, y: 64.57805, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5936895233130394240}
-    m_Position: {x: 380, y: 220, z: 0}
+    m_Position: {x: 230, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8706945289733848307}
     m_Position: {x: 229.11768, y: 305.1834, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -8642636970309439926}
+    m_Position: {x: 230, y: 360, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -130,6 +160,18 @@ AnimatorController:
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
 --- !u!114 &6797258597678411293
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0990cea8a8eec82449839d92bd0d5a1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9146848513298748769
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}

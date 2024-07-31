@@ -12,6 +12,11 @@ public class TransformableObject : InteractableObject
     [SerializeField] GameObject transformedObject;
     [SerializeField] AudioSource audioSource;
 
+    protected override void OverrideableStart()
+    {
+        message = $"Convert {defaultObject.name} into {transformedObject.name}.";// \r\ncost: {cost}";
+    }
+
     void Transform()
     {
         defaultObject.SetActive(false);

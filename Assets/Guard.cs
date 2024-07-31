@@ -100,7 +100,7 @@ public class Guard : Enemy
             float half = (lookAngle / 2);
             if (fromToAngleDeg < half || fromToAngleDeg > 360 - half)
             {
-                //Debug.Log($"fromToAngleDeg: {fromToAngleDeg}; < {half} or > {360-half}  HALF = {half}");
+                Debug.Log($"fromToAngleDeg: {fromToAngleDeg}; < {half} or > {360-half}  HALF = {half}");
 
                 // Test that we can actually see the player
                 RaycastHit hitInfo;

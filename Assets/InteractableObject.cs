@@ -10,10 +10,17 @@ public class InteractableObject : MonoBehaviour
 
     MageController mageController;
     GameController gameController;
+    protected string message;
 
     private void Start()
     {
         gameController = GameController.instance;
+        OverrideableStart();
+    }
+
+    protected virtual void OverrideableStart()
+    {
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,7 +49,8 @@ public class InteractableObject : MonoBehaviour
                 Debug.Log($"Player Can Interact With {gameObject.name}");
                 canInteract = true;
                 mageController?.SetInteractableObject(this);
-                gameController?.PromptUse();
+                
+                gameController?.PromptUse(message);
             } else
             {
                 canInteract=false;

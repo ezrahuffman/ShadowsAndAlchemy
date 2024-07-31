@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
@@ -10,8 +11,11 @@ public class GameController : MonoBehaviour
     bool _gamePaused;
     [SerializeField] GameObject _pauseMenu;
     [SerializeField] EndMenuController endMenuController;
+    [SerializeField] TMP_Text  promptText;
 
     Enemy[] enemies;
+
+    bool prompting;
 
     private void Awake()
     {
@@ -27,12 +31,25 @@ public class GameController : MonoBehaviour
         }
 
         enemies = FindObjectsOfType<Enemy>();
+
+        promptText.enabled = false;
     }
 
     // Show the "Press to use" prompt to the user
-    public void PromptUse()
+    public void PromptUse(string message)
     {
-        Debug.Log("Show use prompt");
+        prompting = true;
+        promptText.enabled = true;
+        promptText.text = message;
+    }
+
+    public void LateUpdate()
+    {
+        if (!prompting)
+        {
+            promptText.enabled = false;
+        }
+        prompting = false;
     }
 
     internal void OnTargetDie()
