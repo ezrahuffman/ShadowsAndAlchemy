@@ -35,7 +35,7 @@ public class MageController : MonoBehaviour
     bool usingDoor;
 
     HashSet<CustomLight> customLights;
-
+    GameController gameController;
     //[SerializeField] InputAction fireDirInput;
     //[SerializeField] InputAction fireInput;
     //[SerializeField] InputAction interactInput;
@@ -61,6 +61,11 @@ public class MageController : MonoBehaviour
         _currEnergy = maxEnergy;
 
         customLights = new HashSet<CustomLight>();
+    }
+
+    private void Start()
+    {
+        gameController = GameController.instance;
     }
 
     private void UseDoorInput_started(InputAction.CallbackContext context)
@@ -97,7 +102,7 @@ public class MageController : MonoBehaviour
     {
         move = moveInput.ReadValue<Vector2>();
 
-        Debug.Log($"player lit = {IsVisable()}");
+        //Debug.Log($"player lit = {IsVisable()}");
 
         UpdateAnimations();
     }
@@ -205,7 +210,8 @@ public class MageController : MonoBehaviour
         {
             return;
         }
-        
+
+        gameController.PauseEnemies();
         currentWeapon.Attack(animator);
         isAttacking = true;
     }

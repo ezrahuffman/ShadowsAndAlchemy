@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -36,5 +37,10 @@ public class GameController : MonoBehaviour
         playerCaught = true;
         
         //TODO: Show Game Over Screen
+    }
+
+    public void PauseEnemies()
+    {
+        throw new NotImplementedException();
     }
 }
