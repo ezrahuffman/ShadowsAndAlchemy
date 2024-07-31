@@ -12,13 +12,6 @@ public class Target : Enemy
         //meshAgent = GetComponent<NavMeshAgent>();
         //MoveToPoint();
     }
-    protected override void OnDie()
-    {
-        base.OnDie();
-
-        // End game
-        GameController.instance.OnTargetDie();
-    }
 
     void MoveToPoint()
     {

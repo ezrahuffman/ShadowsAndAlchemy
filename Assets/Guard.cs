@@ -6,7 +6,9 @@ public class Guard : Enemy
     [SerializeField] SphereCollider sphereCollider;
     [SerializeField] float lookAngle;
     [SerializeField] float lookRange;
+    [SerializeField] bool  debug;
     [SerializeField] GameObject visionIndicator;
+    [SerializeField] LayerMask layerMask;
     MageController mageController;
     bool playerNearby;
    
@@ -28,18 +30,24 @@ public class Guard : Enemy
 
     private void OnTriggerEnter(Collider other)
     {
-        mageController = other.gameObject.GetComponentInParent<MageController>();
-        if (mageController != null)
+        
+        MageController testController = other.gameObject.GetComponentInParent<MageController>();
+        if (testController != null)
         {
+            if (debug)
+                Debug.Log("player entered trigger");
             playerNearby = true;
+            mageController = testController;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        mageController = other.gameObject.GetComponentInParent<MageController>();
-        if (mageController != null)
+        MageController testController = other.gameObject.GetComponentInParent<MageController>();
+        if (testController != null)
         {
+            if (debug)
+                Debug.Log("player exited trigger");
             playerNearby = false;
             mageController = null;
         }
@@ -67,13 +75,22 @@ public class Guard : Enemy
 
     bool canSeePlayer()
     {
+        
         if (!playerNearby)
         {
             return false;
         }
 
+        if (debug)
+        {
+            Debug.Log($"mageController != null ({mageController != null}) && mageController.IsVisable() {mageController?.IsVisable()}");
+        }
         if (mageController != null && mageController.IsVisable())
         {
+            if (debug)
+            {
+                Debug.Log("guard check arc");
+            }
             Vector3 fromGuardToPlayer = mageController.GetPlayerPosition() - transform.position;
             Quaternion fromTo = Quaternion.FromToRotation(transform.forward, fromGuardToPlayer);
             float fromToAngleDeg = fromTo.eulerAngles.y;
@@ -84,7 +101,13 @@ public class Guard : Enemy
             if (fromToAngleDeg < half || fromToAngleDeg > 360 - half)
             {
                 //Debug.Log($"fromToAngleDeg: {fromToAngleDeg}; < {half} or > {360-half}  HALF = {half}");
-                return true;
+
+                // Test that we can actually see the player
+                RaycastHit hitInfo;
+                Physics.Linecast(transform.position, mageController.GetPlayerPosition(), out hitInfo, layerMask);
+                Debug.Log("guard raycast hit: " + hitInfo.collider.gameObject.name);
+                return hitInfo.collider.gameObject.GetComponent<MageController>() != null;
+                   
             }
 
         }
@@ -102,16 +125,16 @@ public class Guard : Enemy
     {
         if (canSeePlayer()) { return; }
 
-        //float halfAng = (lookAngle / 2);
-        //Vector3 forwardShift = (transform.forward * Mathf.Cos(halfAng * Mathf.Deg2Rad)) * lookRange;
-        //Vector3 rightShift = (transform.right * Mathf.Sin(halfAng * Mathf.Deg2Rad)) * lookRange;
-        //Vector3 leftShit = -rightShift;
+        float halfAng = (lookAngle / 2);
+        Vector3 forwardShift = (transform.forward * Mathf.Cos(halfAng * Mathf.Deg2Rad)) * lookRange;
+        Vector3 rightShift = (transform.right * Mathf.Sin(halfAng * Mathf.Deg2Rad)) * lookRange;
+        Vector3 leftShit = -rightShift;
 
-        //Vector3 rightEnd = forwardShift + rightShift + transform.position;
-        //Vector3 leftEnd = forwardShift + leftShit + transform.position;
+        Vector3 rightEnd = forwardShift + rightShift + transform.position;
+        Vector3 leftEnd = forwardShift + leftShit + transform.position;
 
-        //Debug.DrawLine(transform.position, rightEnd, Color.red);
-        //Debug.DrawLine(transform.position, leftEnd, Color.red);
+        Debug.DrawLine(transform.position, rightEnd, Color.red);
+        Debug.DrawLine(transform.position, leftEnd, Color.red);
     }
 
     void CatchPlayer()
@@ -124,5 +147,7 @@ public class Guard : Enemy
         base.OnDie();
 
         visionIndicator?.SetActive(false);
+        GetComponent<CapsuleCollider>().enabled = false;
+        this.enabled = false;
     }
 }

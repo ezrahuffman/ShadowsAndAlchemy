@@ -55,7 +55,10 @@ public class GameController : MonoBehaviour
     {
         foreach (Enemy enemy in enemies)
         {
+            if (enemy.isActiveAndEnabled)
+            {
                 enemy.canMove = false;
+            }
         }
     }
 
@@ -63,7 +66,7 @@ public class GameController : MonoBehaviour
     {
         foreach (Enemy enemy in enemies)
         {
-            if (!enemy.isDead)
+            if (enemy.isActiveAndEnabled && !enemy.isDead)
             {
                 enemy.canMove = true;
             }
