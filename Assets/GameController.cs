@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 
     bool _gamePaused;
     [SerializeField] GameObject _pauseMenu;
+    [SerializeField] EndMenuController endMenuController;
 
     private void Awake()
     {
@@ -32,14 +33,17 @@ public class GameController : MonoBehaviour
     internal void OnTargetDie()
     {
         Debug.Log("Game over! Show the winning end screen.");
+
+        endMenuController.OpenMenu(playerWon: true);
     }
 
     internal void OnPlayerCaught()
     {
         Debug.Log("Player caught. Game Over");
         playerCaught = true;
-        
-        //TODO: Show Game Over Screen
+
+        // Show Game Over Screen as lost
+        endMenuController.OpenMenu(playerWon: false);
     }
 
     public void PauseEnemies()

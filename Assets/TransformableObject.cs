@@ -10,12 +10,17 @@ public class TransformableObject : InteractableObject
 
     // NOTE: this should be on the player for now, but be an independant item later
     [SerializeField] GameObject transformedObject;
+    [SerializeField] AudioSource audioSource;
 
     void Transform()
     {
         defaultObject.SetActive(false);
         transformedObject.SetActive(true);
+
+        audioSource.Play();
+
         this.enabled = false;
+
     }
 
     public override void Interact()

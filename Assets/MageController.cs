@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -37,6 +36,12 @@ public class MageController : MonoBehaviour
 
     HashSet<CustomLight> customLights;
     GameController gameController;
+
+    [SerializeField] List<AudioClip> footSteps;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] float footStepCooldown;
+    float footStepTimer;
+    int prevStepSoundIndex;
     //[SerializeField] InputAction fireDirInput;
     //[SerializeField] InputAction fireInput;
     //[SerializeField] InputAction interactInput;
@@ -73,6 +78,7 @@ public class MageController : MonoBehaviour
 
     private void Start()
     {
+        prevStepSoundIndex = -1; // make it so every index is possible on the first pass
         gameController = GameController.instance;
     }
 
@@ -113,6 +119,31 @@ public class MageController : MonoBehaviour
         //Debug.Log($"player lit = {IsVisable()}");
 
         UpdateAnimations();
+
+        if(currentAnimHash == runAnimationHash)
+        {
+            PlayFootStep();
+        }
+    }
+
+    
+
+    void PlayFootStep()
+    {
+        if(Time.time > footStepTimer)
+        {
+            Debug.Log("play footstep");
+            footStepTimer = Time.time + footStepCooldown;
+       
+            int randIndex = Random.Range(0, footSteps.Count);
+            if(randIndex == prevStepSoundIndex)
+            {
+                randIndex = (randIndex + 1) % footSteps.Count;
+            }
+            audioSource.clip = footSteps[randIndex];
+            prevStepSoundIndex = randIndex;
+            audioSource.Play();
+        }
     }
 
     void UpdateAnimations()

@@ -15,6 +15,8 @@ public class Door : MonoBehaviour
     [SerializeField] GameObject outsideLight;
 
     [SerializeField] bool lightToDark;
+
+    [SerializeField] AudioSource audioSource;
     
 
 
@@ -77,6 +79,8 @@ public class Door : MonoBehaviour
         MageController  mage = Player.GetComponent<MageController>();
         Vector3 playerPos = mage.GetPlayerPosition();
         bool isSideOne = Vector3.Distance(side_1.position, playerPos) < Vector3.Distance(side_2.position, playerPos);
+
+        audioSource.Play();
 
         if (isSideOne)
         {

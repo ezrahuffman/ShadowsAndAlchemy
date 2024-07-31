@@ -17,8 +17,14 @@ public class Enemy : MonoBehaviour
     Animator animator;
     int currentPathPointIndex;
 
+    [SerializeField] List<AudioClip> stabSounds;
+    [SerializeField] AudioSource audioSource;
+    int prevStabSoundIndex;
+
     private void Start()
     {
+        prevStabSoundIndex = -1; // allow any stab sound to be played first
+
         healthSystem = new HealthSystem(maxHealth);
         healthSystem.onDie += OnDie;
         animator = GetComponent<Animator>();
@@ -64,7 +70,22 @@ public class Enemy : MonoBehaviour
     {
         Debug.Log("Enemy took dmg");
         healthSystem.TakeDmg(damage);
+
+        PlayStabSound();
     }
+
+    void PlayStabSound()
+    {
+        int randIndex = Random.Range(0, stabSounds.Count);
+        if (randIndex == prevStabSoundIndex)
+        {
+            randIndex = (randIndex + 1) % stabSounds.Count;
+        }
+        audioSource.clip = stabSounds[randIndex];
+        prevStabSoundIndex = randIndex;
+        audioSource.Play();  
+    }
+
 
     protected virtual void OnDie()
     {
