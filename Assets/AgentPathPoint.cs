@@ -17,10 +17,17 @@ public class AgentPathPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.isTrigger) // Avoid interactions with the sphere collider on the guards
+        {
+            return;
+        }
         Enemy enemy = other.GetComponent<Enemy>();
         if(enemy != null && enemy == agent)
         {
-            Debug.Log("start timer");
+            if (other.GetComponent<Guard>() != null)
+            {
+                Debug.Log("start timer");
+            }
             StartWaitTimer();
         }
     }
