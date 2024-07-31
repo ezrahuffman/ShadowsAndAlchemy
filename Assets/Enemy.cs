@@ -54,7 +54,6 @@ public class Enemy : MonoBehaviour
 
         if (path[currentPathPointIndex] != point)
         {
-            firstPoint = true;
             return;
         }
 
