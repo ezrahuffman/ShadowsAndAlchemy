@@ -117,6 +117,7 @@ public class MageController : MonoBehaviour
         move = moveInput.ReadValue<Vector2>();
 
         //Debug.Log($"player lit = {IsVisable()}");
+        Debug.Log("Time.timeScale: " + Time.timeScale);
 
         UpdateAnimations();
 

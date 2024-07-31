@@ -83,7 +83,6 @@ public class Guard : Enemy
             if (fromToAngleDeg < half || fromToAngleDeg > 360 - half)
             {
                 //Debug.Log($"fromToAngleDeg: {fromToAngleDeg}; < {half} or > {360-half}  HALF = {half}");
-                Debug.Break();
                 return true;
             }
 
@@ -101,6 +100,17 @@ public class Guard : Enemy
     void drawLineOfSight()
     {
         if (canSeePlayer()) { return; }
+
+        //float halfAng = (lookAngle / 2);
+        //Vector3 forwardShift = (transform.forward * Mathf.Cos(halfAng * Mathf.Deg2Rad)) * lookRange;
+        //Vector3 rightShift = (transform.right * Mathf.Sin(halfAng * Mathf.Deg2Rad)) * lookRange;
+        //Vector3 leftShit = -rightShift;
+
+        //Vector3 rightEnd = forwardShift + rightShift + transform.position;
+        //Vector3 leftEnd = forwardShift + leftShit + transform.position;
+
+        //Debug.DrawLine(transform.position, rightEnd, Color.red);
+        //Debug.DrawLine(transform.position, leftEnd, Color.red);
     }
 
     void CatchPlayer()

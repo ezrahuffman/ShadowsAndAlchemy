@@ -21,6 +21,10 @@ public class PauseMenuController : MonoBehaviour
             }
         }
 
+        if (Time.timeScale < 1f)
+        {
+            Time.timeScale = 1f;
+        }
         
     }
 
