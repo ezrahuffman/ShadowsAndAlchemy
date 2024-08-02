@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class Guard : Enemy
@@ -8,6 +9,7 @@ public class Guard : Enemy
     [SerializeField] float lookRange;
     [SerializeField] bool  debug;
     [SerializeField] GameObject visionIndicator;
+    //[SerializeField] TMP_Text debugText;
     [SerializeField] LayerMask layerMask;
     MageController mageController;
     bool playerNearby;
@@ -41,20 +43,21 @@ public class Guard : Enemy
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        MageController testController = other.gameObject.GetComponentInParent<MageController>();
-        if (testController != null)
-        {
-            if (debug)
-                Debug.Log("player exited trigger");
-            playerNearby = false;
-            mageController = null;
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    MageController testController = other.gameObject.GetComponentInParent<MageController>();
+    //    if (testController != null)
+    //    {
+    //        if (debug)
+    //            Debug.Log("player exited trigger");
+    //        playerNearby = false;
+    //        mageController = null;
+    //    }
+    //}
 
     private void Update()
     {
+        //debugText.text = "";
         if (canSeePlayer())
         {
             CatchPlayer();
@@ -78,39 +81,51 @@ public class Guard : Enemy
         
         if (!playerNearby)
         {
+            //debugText.text = "not nearby";
             return false;
         }
 
-        if (debug)
+        float distance = Vector3.Distance(transform.position, mageController.GetPlayerPosition());
+        if (distance > lookRange)
         {
-            Debug.Log($"mageController != null ({mageController != null}) && mageController.IsVisable() {mageController?.IsVisable()}");
+            return false;
         }
+        
         if (mageController != null && mageController.IsVisable())
         {
-            if (debug)
-            {
-                Debug.Log("guard check arc");
-            }
+            //if (debug)
+            //{
+            //    Debug.Log("guard check arc");
+            //}
             Vector3 fromGuardToPlayer = mageController.GetPlayerPosition() - transform.position;
+            fromGuardToPlayer = new Vector3(fromGuardToPlayer.x, 0, fromGuardToPlayer.z);
             Quaternion fromTo = Quaternion.FromToRotation(transform.forward, fromGuardToPlayer);
             float fromToAngleDeg = fromTo.eulerAngles.y;
 
+            float dot = Vector3.Dot(fromGuardToPlayer.normalized, transform.forward);
+            float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
+
+
+            //if (debug)
+            //    //debugText.text = angle.ToString();
 
             // Test the amount of rotation needed to see if it is within the line of sight of the player
             float half = (lookAngle / 2);
-            if (fromToAngleDeg < half || fromToAngleDeg > 360 - half)
+            if (angle < half || angle > 360 - half)
             {
-                Debug.Log($"fromToAngleDeg: {fromToAngleDeg}; < {half} or > {360-half}  HALF = {half}");
+                Debug.Log($"{gameObject.name}| fromToAngleDeg: {angle}; < {half} or > {360-half}  HALF = {half}");
 
                 // Test that we can actually see the player
                 RaycastHit hitInfo;
                 Physics.Linecast(transform.position, mageController.GetPlayerPosition(), out hitInfo, layerMask);
                 Debug.Log("guard raycast hit: " + hitInfo.collider.gameObject.name);
+                //Debug.Break();
                 return hitInfo.collider.gameObject.GetComponent<MageController>() != null;
                    
             }
 
         }
+       
 
         // Not looking at the object, or not the player
         return false;
@@ -139,6 +154,7 @@ public class Guard : Enemy
 
     void CatchPlayer()
     {
+        Debug.Log($"Caught by {gameObject.name}");
         gameController.OnPlayerCaught();
     }
 

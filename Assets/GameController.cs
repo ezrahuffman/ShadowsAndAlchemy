@@ -31,7 +31,7 @@ public class GameController : MonoBehaviour
         }
 
         enemies = FindObjectsOfType<Enemy>();
-
+        
         promptText.enabled = false;
     }
 

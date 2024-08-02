@@ -15,6 +15,7 @@ public class Door : MonoBehaviour
     [SerializeField] GameObject outsideLight;
 
     [SerializeField] bool lightToDark;
+    [SerializeField] bool needsWeapon;
 
     [SerializeField] AudioSource audioSource;
     
@@ -49,8 +50,16 @@ public class Door : MonoBehaviour
         {
             if (PlayerIsLookingAtObject(Player))
             {
-                gameController.PromptUse("Press 'E' to use door");
-                canUse = true;
+                if (needsWeapon && !Player.GetComponent<MageController>().HasWeapon())
+                {
+                    gameController.PromptUse("You dont have a weapon.\n\rTransform one of the items on the table.");
+                    canUse = false;
+                }
+                else
+                {
+                    gameController.PromptUse("Press 'E' to use door");
+                    canUse = true;
+                }
             }
             else
             {

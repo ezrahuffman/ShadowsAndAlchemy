@@ -376,4 +376,9 @@ public class MageController : MonoBehaviour
     {
         customLights.Remove(light);
     }
+
+    internal bool HasWeapon()
+    {
+        return currentWeapon != null;
+    }
 }
