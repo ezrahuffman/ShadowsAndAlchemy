@@ -14,11 +14,16 @@ public class AttackHitManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.isTrigger)
+        {
+            return;
+        }
         Debug.Log($"{other.gameObject} entered");
         Enemy enemy = other.GetComponent<Enemy>(); 
         if (enemy != null)
         {
             Debug.Log($"{other.gameObject} can be attacked");
+            Debug.Break();
             enemySet.Add(enemy);
         }
     }

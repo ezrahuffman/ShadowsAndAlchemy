@@ -21,6 +21,16 @@ public class Weapon : MonoBehaviour
         _remainingDurability = durability;
     }
 
+    private void OnEnable()
+    {
+        hitManager.gameObject.SetActive(true);
+    }
+
+    private void OnDisable()
+    {
+        hitManager.gameObject.SetActive(false);
+    }
+
     public void Attack(Animator animator)
     {
         Debug.Log("Weapon Attack");
