@@ -1,0 +1,40 @@
+Why are targets, targets?
+* they took something from the protagonist
+> The protagonist interrogates targets before killing them [need text system, see celest]
+
+What did they take?
+* something with little monetary value but a lot of sentimental value. A gift from someone who is gone. Clothing (not nice).
+> It should not be directly revealed to the player that the clothing, a pair of socks (it was kept with the treasure), was made by someone who is now dead.
+
+
+Levels are the main dungeon part and the targets are bosses at the end of the levels.
+
+Story revealed by interactions with targets
+```````````````````````````````````````````
+Lvl. 1 (Hotel):
+* after robbing your house the villains have retreated to a small hotel
+* hotel staff can be killed, but should not be.
+* hotel staff will not report you.
+
+Target 1> Who are you?
+Player> Someone looking for their stuff. Where is it?
+T1> Why would I tell you?
+Player> Oh, you'll tell me.
+*fight*
+T1> Okay. Okay. What do you want?
+Player> I already told you. I want my stuff back.
+T1> You're going to have to be more specific, we take a lot of peoples stuff.
+Player> A wooden chest from a small farm east of here.
+T1> What? That small chest? We already sent it off to the boss.
+Player> Where is that?
+T1> They are going to sell it off North of hear in an abandoned keep.
+Player> It's too bad you don't have it.
+*eliminates target*
+
+Lvl. 2 (Abandoned Keep):
+This is where the robber's boss is meeting a wealthy seller who is going to buy the treasure.
+The protagonist misses the treasure again but finds the location of the buyer is at castle.
+This is where we get the reveal that the player is looking for a pair of socks. The villain offers to pay off the protagonist for the amount of gold they took, but the protagonist reveals that they don't care about the gold and only want the socks.
+
+Lvl. 3 (Castle):
+Final stage where we get the reveal of why the socks are so important (see general Q&A at the top of the page).
