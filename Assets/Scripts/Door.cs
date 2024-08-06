@@ -16,6 +16,7 @@ public class Door : MonoBehaviour
 
     [SerializeField] bool lightToDark;
     [SerializeField] bool needsWeapon;
+    [SerializeField] bool oneWay;
 
     [SerializeField] AudioSource audioSource;
     
@@ -50,7 +51,14 @@ public class Door : MonoBehaviour
         {
             if (PlayerIsLookingAtObject(Player))
             {
-                if (needsWeapon && !Player.GetComponent<MageController>().HasWeapon())
+                Vector3 playerPos = Player.GetComponent<MageController>().GetPlayerPosition();
+                bool isSideOne = Vector3.Distance(side_1.position, playerPos) < Vector3.Distance(side_2.position, playerPos);
+                if (oneWay && !isSideOne)
+                {
+                    gameController.PromptUse("You can't go this way.");
+                    canUse = false;
+                }
+                else if (needsWeapon && !Player.GetComponent<MageController>().HasWeapon())
                 {
                     gameController.PromptUse("You dont have a weapon.\n\rTransform one of the items on the table.");
                     canUse = false;

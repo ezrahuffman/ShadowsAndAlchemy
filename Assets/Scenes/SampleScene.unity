@@ -7207,6 +7207,7 @@ MonoBehaviour:
   outsideLight: {fileID: 705507993}
   lightToDark: 0
   needsWeapon: 0
+  oneWay: 0
   audioSource: {fileID: 860522033}
 --- !u!65 &860522030
 BoxCollider:
@@ -18266,6 +18267,7 @@ MonoBehaviour:
   outsideLight: {fileID: 705507993}
   lightToDark: 1
   needsWeapon: 1
+  oneWay: 1
   audioSource: {fileID: 1963998487}
 --- !u!135 &1963998478
 SphereCollider:

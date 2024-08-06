@@ -381,4 +381,9 @@ public class MageController : MonoBehaviour
     {
         return currentWeapon != null;
     }
+
+    internal int CurrentMana()
+    {
+        return _currEnergy;
+    }
 }

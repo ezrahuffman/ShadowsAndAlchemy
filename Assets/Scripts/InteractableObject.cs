@@ -8,8 +8,8 @@ public class InteractableObject : MonoBehaviour
 
     protected bool canInteract = false;
 
-    MageController mageController;
-    GameController gameController;
+    protected MageController mageController;
+    protected GameController gameController;
     protected string message;
 
     private void Start()
@@ -49,8 +49,10 @@ public class InteractableObject : MonoBehaviour
                 Debug.Log($"Player Can Interact With {gameObject.name}");
                 canInteract = true;
                 mageController?.SetInteractableObject(this);
+
+
+                Prompt();
                 
-                gameController?.PromptUse(message);
             } else
             {
                 canInteract=false;
@@ -58,6 +60,11 @@ public class InteractableObject : MonoBehaviour
         }else {
             canInteract = false;
         }
+    }
+
+    protected virtual void Prompt()
+    {
+        gameController?.PromptUse(message);
     }
 
     bool PlayerIsLookingAtObject(GameObject Player)

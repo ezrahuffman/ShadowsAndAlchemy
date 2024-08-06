@@ -14,7 +14,7 @@ public class TransformableObject : InteractableObject
 
     protected override void OverrideableStart()
     {
-        message = $"Convert {defaultObject.name} into {transformedObject.name}.";// \r\ncost: {cost}";
+        message = $"Convert {defaultObject.name} into {transformedObject.name}.\r\ncost: {cost}";
     }
 
     void Transform()
@@ -26,6 +26,21 @@ public class TransformableObject : InteractableObject
 
         this.enabled = false;
 
+    }
+
+    protected override void Prompt()
+    {
+        if (mageController != null)
+        {
+            if (mageController.CurrentMana() < cost)
+            {
+                gameController.PromptUse($"Not enough mana, need {cost}");
+            }
+            else
+            {
+                gameController.PromptUse(message);
+            }
+        }
     }
 
     public override void Interact()
