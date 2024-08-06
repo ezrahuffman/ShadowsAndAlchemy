@@ -16,7 +16,9 @@ public class MageController : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] GameObject mage;
     [SerializeField] bool canMove;
-    
+
+    [SerializeField] ParticleSystem breakEffect;
+
     int runAnimationHash;
     int idleAnimationHash;
 
@@ -38,6 +40,8 @@ public class MageController : MonoBehaviour
     GameController gameController;
 
     [SerializeField] List<AudioClip> footSteps;
+    [SerializeField] AudioClip breakSound;
+    [SerializeField] float breakSoundVolume;
     [SerializeField] AudioSource audioSource;
     [SerializeField] float footStepCooldown;
     float footStepTimer;
@@ -344,6 +348,15 @@ public class MageController : MonoBehaviour
         Debug.Log($"broke {_weaponToBreak.gameObject.name}");
         RemoveWeapon(_weaponToBreak);
         _weaponToBreak.gameObject.SetActive(false);
+
+        float sourceVolume = audioSource.volume;
+
+        audioSource.volume = breakSoundVolume;
+        breakEffect.Play();
+        audioSource.clip = breakSound;
+        audioSource.Play();
+
+        audioSource.volume = sourceVolume;
     }
 
     internal void FinishAttack()

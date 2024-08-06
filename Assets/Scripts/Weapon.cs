@@ -6,6 +6,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] string animationName;
     [SerializeField] int durability;
     [SerializeField] AttackHitManager hitManager;
+    
 
     int attackAnimationHash;
     int _remainingDurability;

@@ -6,6 +6,7 @@ public class TransformableObject : InteractableObject
     [SerializeField] int cost;
 
     [SerializeField] GameObject defaultObject;
+    [SerializeField] ParticleSystem smokeEffect;
 
 
     // NOTE: this should be on the player for now, but be an independant item later
@@ -22,6 +23,7 @@ public class TransformableObject : InteractableObject
         defaultObject.SetActive(false);
         transformedObject.SetActive(true);
 
+        smokeEffect.Play();
         audioSource.Play();
 
         this.enabled = false;
