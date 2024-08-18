@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class GameController : MonoBehaviour
     [SerializeField] GameObject _pauseMenu;
     [SerializeField] EndMenuController endMenuController;
     [SerializeField] TMP_Text  promptText;
+    [SerializeField] Image weaponIconSprite;
+    [SerializeField] FillBar durabilityFillBar;
+    Sprite defaultWeaponIcon;
 
     Enemy[] enemies;
 
@@ -33,6 +37,8 @@ public class GameController : MonoBehaviour
         enemies = FindObjectsOfType<Enemy>();
         
         promptText.enabled = false;
+
+        defaultWeaponIcon = weaponIconSprite.sprite;
     }
 
     // Show the "Press to use" prompt to the user
@@ -117,5 +123,23 @@ public class GameController : MonoBehaviour
         {
             ResumeGame();
         }
+    }
+
+    public void SetWeaponIcon(Sprite newIcon)
+    {
+        weaponIconSprite.sprite = newIcon;
+        durabilityFillBar.gameObject.SetActive(true);
+        durabilityFillBar.SetFill(1); 
+    }
+
+    public void ClearWeaponIcon()
+    {
+        weaponIconSprite.sprite = defaultWeaponIcon;
+        durabilityFillBar.gameObject.SetActive(false); 
+    }
+
+    internal void SetDurabilityFill(float percentage)
+    {
+        durabilityFillBar.SetFill(percentage);
     }
 }

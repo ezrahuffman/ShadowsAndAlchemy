@@ -348,6 +348,7 @@ public class MageController : MonoBehaviour
         Debug.Log($"broke {_weaponToBreak.gameObject.name}");
         RemoveWeapon(_weaponToBreak);
         _weaponToBreak.gameObject.SetActive(false);
+        gameController.ClearWeaponIcon();
 
         float sourceVolume = audioSource.volume;
 

@@ -6,6 +6,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] string animationName;
     [SerializeField] int durability;
     [SerializeField] AttackHitManager hitManager;
+    [SerializeField] Sprite icon;
     
 
     int attackAnimationHash;
@@ -13,7 +14,6 @@ public class Weapon : MonoBehaviour
 
     public delegate void OnBreak(Weapon weapon);
     public OnBreak onBreak;
-
    
 
     private void Start()
@@ -25,6 +25,7 @@ public class Weapon : MonoBehaviour
     private void OnEnable()
     {
         hitManager.gameObject.SetActive(true);
+        GameController.instance.SetWeaponIcon(icon);
     }
 
     private void OnDisable()
@@ -39,6 +40,8 @@ public class Weapon : MonoBehaviour
         animator.Play(attackAnimationHash); // This needs to also be handled by the mage controller so other animations don't cancel it
 
         _remainingDurability--;
+
+        GameController.instance.SetDurabilityFill((float)_remainingDurability / durability);
 
         if (_remainingDurability <= 0)
         {

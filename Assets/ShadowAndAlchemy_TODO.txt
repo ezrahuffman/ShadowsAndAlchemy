@@ -1,0 +1,145 @@
+-----------------------------------------------------------
+|**WEEKLY BUILD** (Every Sunday, Video Every Other Sunday)|
+-----------------------------------------------------------
+8/4 - new build (v09)
+
+
+
+
+- Takes Energy to transform things
+- Only have a limited amount of energy
+
+- Allow the player to take out lights to better hide
+
+
+Prototyped:
+- energy system (mana)
+	- transforming objects takes energy
+	- energy does not regen
+	- can't transform objects if not enough energy
+- Doors
+	- use when near and looking at door 
+	- move the player to other side of door 
+- level building/design (Due by weekend)
+	- spooky
+	- shadowy**** (part of requirements)
+- transform objects (Due by weekend)
+	- NOTE: TransformableObjects.cs
+	- change normal objects into weapons/tools [done]
+	- interactable objects (player must be facing and near) [done]
+	- prompt user when able to use object [done]
+- weapons (Due by Sunday)
+	- weapons need to be usable and should have a very low durability so they can only be used to attack a few times at most. [done]
+	- health system (player doesn't need health) [done]
+	- deal dmg [done]
+	- Simple hit box to check for hits [done]
+- fixed door bug
+- Added navigation mesh
+- target (Due by Monday)
+	- able to be eliminated by player [done]
+	- movement patterns  [Done, use AgentPathPoints to make paths and add wait times]
+- guards (Due by Monday) 
+	- Movement patterns [Done, use AgentPathPoints to make paths and add wait times]
+	- Sense player
+		- use lights to scan for player ( just see player if they are in the light, the guards themselves don't have lights) [done]
+		- if seen they target player and player loses (no way to outrun guards once they see you) [done]
+		- can also be eliminated by player but **must be unseen** [done by default, because the game ends if the player is seen]
+- Light reveals player
+	- light scale determines if the player has been found (if player is lit in the line of sight of the guards, they are found) [done]
+- final level building/design
+	- spooky [done]
+	- shadowy**** (part of requirements) [done]
+- menus (take from skydiving game)
+	- main (functional, needs art/tone matching) [done]
+	- pause [done]
+	- game over [done]
+- sound 
+	- sfx
+		- footsteps [done]
+		- doors [done]
+		- attacks [done]
+		- transformation [done]
+- Show Guard Vision
+	- This can probably be cheated with white arcs made in photoshop once the level design is finalized [done]
+- Bugs fixed [done]
+ 	- Target not moving in the web build
+	- menus not sized right in the web build
+	- end menu might not be working (hard to know because the sizing is wrong)
+- when attacking lock the motion of targets to see if the hit lands (because the player cannot move when attacking). Ideally this would be handled with animations, but that doesn't seem very feasible for the game jam. [done]
+
+- bug: player can be seen through walls [fixed]
+	fix: added LineCast as the final check to see if the guards can see the player.
+- bug: player was not being recognized by the guards [fixed]
+	fix: had to use a temp variable to check if the collider had a mage controller (because otherwise the variable would be overwritten to null when it shouldn't be)
+- final level building/design
+	- guard patrol layouts [3/3, done]
+-UI
+	- Prompt user to transform items (show cost) [done]
+- show game over menu after the target dies
+
+----------------------------------------- <- After game jam
+- use mana and durability [done]
+- Better hit boxes for the enemies [done]
+- Don't prompt the player to have a weapon when they are leaving (should probably just not allow the player to leave through the first door.) [done] 
+- Prompts for energy being empty [done]
+----------<Last Push> 
+
+- smoke effect when transforming object [done]
+- sound and smoke effect when the players weapon breaks
+- icon for current weapon [done]
+- weapon durability bar/indicator [done]
+
+
+----------------------------------
+Todo:
+
+- Show details for equipped weapon  
+
+- only stop enemy movement if they are hit, not when the player attacks.
+- inventory - to hold weapons/items (don't need a lot of slots)
+- sound scales
+	- sound scale determines how far away enemies can hear the player. If the player is heard, the guards will chase 	them.
+
+- more items/weapons
+	- get the blender files to edit/change
+- scene dressing
+
+- music
+- plot
+- more levels
+- animation for when player is caught
+
+
+- walk/run toggle
+ 	- speed control
+	- animation
+	- sound
+	- enemy moves toward player if they make sound
+- mini map
+
+- Should reset the player if they are in an impossible situation. Or prompt to do so
+
+
+- music
+
+-UI (put some effort/research into making this look good)
+	- Show mana
+	- Show weapon durability
+	- Show lit/shadow
+
+- Instructions, tutorial
+	- Might be worth just converting the first level into a tutorial
+
+- settings menu
+
+- animation lock target and player when the player attacks
+
+- add enemies that the player must run away from (can't hide/must hid in specific spots)
+
+Sound Attribution:
+
+Stab sounds from Zapsplat.com
+All other sounds from Kenney (www.kenney.nl)
+
+
+	
