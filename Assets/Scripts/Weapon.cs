@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] int dmg;
+    [SerializeField] int dmg;                       // This isn't really used at the moment, every weapon is a one-hit kill
     [SerializeField] string animationName;
-    [SerializeField] int durability;
+    [SerializeField] int durability;                // Number of times the weapon can be used
     [SerializeField] AttackHitManager hitManager;
     [SerializeField] Sprite icon;
     

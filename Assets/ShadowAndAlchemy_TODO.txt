@@ -90,7 +90,7 @@ Prototyped:
 - weapon durability bar/indicator [done]
 - Show details for equipped weapon  (there are no details to show) [scrapped]
 - prompt text renders over menu [fixed]
-
+- mini map [done "first pass"]
 
 ---------------------------------- (16)
 Todo:
@@ -128,7 +128,6 @@ mechanics:
 	- animation
 	- sound (louder and faster for run) 
 	- enemy moves toward player if they make enough sound
-- mini map
 - Should reset the player if they are in an impossible situation. Or prompt to do so
 -UI (put some effort/research into making this look good)
 	- Show mana
