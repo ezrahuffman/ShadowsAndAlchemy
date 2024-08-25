@@ -92,6 +92,12 @@ Prototyped:
 - prompt text renders over menu [fixed]
 - mini map [done "first pass"]
 
+<First Attempt at Video>
+- Outline the player when they are in the dark, so it is easier to see them
+	- add outline shader [done]
+	- toggle outline when player not lit. [done]
+
+
 ---------------------------------- (16)
 Todo:
 Maybe:
@@ -100,10 +106,6 @@ Maybe:
 - inventory - to hold weapons/items (don't need a lot of slots)
 
 Need:
-- Outline the player when they are in the dark, so it is easier to see them
-- sound scales
-	- sound scale determines how far away enemies can hear the player. If the player is heard, the guards will chase 	them.
-
 art:
 - more items/weapons
 	- get the blender files to edit/change
@@ -123,6 +125,9 @@ design:
 
 
 mechanics:
+- sound scales
+	- sound scale determines how far away enemies can hear the player. If the player is heard, the guards will chase 	them.
+
 - walk/run toggle
  	- speed control
 	- animation
@@ -131,9 +136,14 @@ mechanics:
 - Should reset the player if they are in an impossible situation. Or prompt to do so
 -UI (put some effort/research into making this look good)
 	- Show mana
-	- Show weapon durability
-	- Show lit/shadow
+	- Show weapon durability [done]
+	- Show lit/shadow 
 - settings menu
+Item stuff: (What sort of items would be good? all weapons are already one hit)
+	*Speed, mana, joke items, narrative items, 
+	- looting enemies
+	- inventory
+	- chests
 - add enemies that the player must run away from (can't hide/must hid in specific spots)
 
 bugs: 

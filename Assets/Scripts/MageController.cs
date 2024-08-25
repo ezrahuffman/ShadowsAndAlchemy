@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.PostProcessing;
 
 public class MageController : MonoBehaviour
 {
@@ -46,6 +47,10 @@ public class MageController : MonoBehaviour
     [SerializeField] float footStepCooldown;
     float footStepTimer;
     int prevStepSoundIndex;
+
+
+    [SerializeField] PostProcessLayer compositeEffect;
+    [SerializeField] PostProcessLayer outlineEffect;
     //[SerializeField] InputAction fireDirInput;
     //[SerializeField] InputAction fireInput;
     //[SerializeField] InputAction interactInput;
@@ -56,7 +61,7 @@ public class MageController : MonoBehaviour
     {
         moveInput.Enable();
         transformInput.Enable();
-        useDoorInput.Enable(); 
+        useDoorInput.Enable();
         attackInput.Enable();
         pauseInput.Enable();
 
@@ -66,7 +71,7 @@ public class MageController : MonoBehaviour
         pauseInput.started += PauseInput_started;
 
         runAnimationHash = Animator.StringToHash("Running_A");
-        idleAnimationHash =  Animator.StringToHash("Idle");
+        idleAnimationHash = Animator.StringToHash("Idle");
 
         currentAnimHash = idleAnimationHash;
 
@@ -74,6 +79,27 @@ public class MageController : MonoBehaviour
 
         customLights = new HashSet<CustomLight>();
     }
+
+    void EnableOutline()
+    {
+        if (compositeEffect.enabled)
+            return;
+
+
+        compositeEffect.enabled = true;
+        outlineEffect.enabled = true;
+    }
+
+    void DisableOutline()
+    {
+        if (!compositeEffect.enabled)
+            return;
+
+        compositeEffect.enabled = false;
+        outlineEffect.enabled = false;
+    }
+
+
 
     private void PauseInput_started(InputAction.CallbackContext context)
     {
@@ -92,7 +118,7 @@ public class MageController : MonoBehaviour
         {
             //usingDoor = true;
             UseDoor();
-        } else if(currentInteractableObj != null) {
+        } else if (currentInteractableObj != null) {
             TransformableObject transformableObject = currentInteractableObj?.GetComponent<TransformableObject>();
             if (transformableObject != null)
             {
@@ -118,9 +144,19 @@ public class MageController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         move = moveInput.ReadValue<Vector2>();
 
         Debug.Log($"player lit = {IsVisable()}");
+
+        bool isLit = IsVisable();
+        if (!isLit) {
+            EnableOutline();
+        }
+        else
+        {
+            DisableOutline();
+        }
 
         UpdateAnimations();
 

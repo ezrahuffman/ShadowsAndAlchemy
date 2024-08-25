@@ -23,7 +23,8 @@ public class AttackHitManager : MonoBehaviour
         if (enemy != null)
         {
             Debug.Log($"{other.gameObject} can be attacked");
-            Debug.Break();
+            //
+            //Debug.Break();
             enemySet.Add(enemy);
         }
     }
