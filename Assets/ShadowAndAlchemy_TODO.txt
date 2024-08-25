@@ -136,8 +136,8 @@ mechanics:
 - Should reset the player if they are in an impossible situation. Or prompt to do so
 -UI (put some effort/research into making this look good)
 	- Show mana
-	- Show weapon durability [done]
-	- Show lit/shadow 
+	- Show weapon durability [done] 
+
 - settings menu
 Item stuff: (What sort of items would be good? all weapons are already one hit)
 	*Speed, mana, joke items, narrative items, 
