@@ -5,7 +5,12 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class MageController : MonoBehaviour
 {
+    // Run/Walk variables
     [SerializeField] float moveSpeed;
+    [SerializeField] float sprintSpeed;
+    [SerializeField, Range(0f, 1f)] float moveSpeedRampFactor;
+    bool isSprinting = false;
+    float currSpeed;
 
     // Input
     [SerializeField] InputAction moveInput;
@@ -13,6 +18,7 @@ public class MageController : MonoBehaviour
     [SerializeField] InputAction useDoorInput;
     [SerializeField] InputAction attackInput;
     [SerializeField] InputAction pauseInput;
+    [SerializeField] InputAction sprintInput;
 
     [SerializeField] Animator animator;
     [SerializeField] GameObject mage;
@@ -51,6 +57,8 @@ public class MageController : MonoBehaviour
 
     [SerializeField] PostProcessLayer compositeEffect;
     [SerializeField] PostProcessLayer outlineEffect;
+
+  
     //[SerializeField] InputAction fireDirInput;
     //[SerializeField] InputAction fireInput;
     //[SerializeField] InputAction interactInput;
@@ -64,6 +72,7 @@ public class MageController : MonoBehaviour
         useDoorInput.Enable();
         attackInput.Enable();
         pauseInput.Enable();
+        sprintInput.Enable();
 
         transformInput.started += TransformInput_started;
         useDoorInput.started += UseDoorInput_started;
@@ -158,6 +167,10 @@ public class MageController : MonoBehaviour
             DisableOutline();
         }
 
+        isSprinting = sprintInput.IsPressed();
+
+        
+
         UpdateAnimations();
 
         if(currentAnimHash == runAnimationHash)
@@ -200,6 +213,12 @@ public class MageController : MonoBehaviour
             animator.Play(idleAnimationHash);
             currentAnimHash = idleAnimationHash;
         }
+        /*
+        if (move.magnitude > walkSpeed && currentAnimHash != sprintAnimationHash)
+        {
+            animator.Play(runAnimationHash);
+            currentAnimHash = runAnimationHash;
+        }*/
     }
 
 
@@ -208,11 +227,14 @@ public class MageController : MonoBehaviour
         // Don't move while attacking
         if (isAttacking || !canMove) { return; }
 
+        float desiredSpeed = isSprinting ? sprintSpeed : moveSpeed;
+        float speed = Mathf.Lerp(currSpeed, desiredSpeed, moveSpeedRampFactor);
+
         Vector3 moveVect = Vector3.zero;
         moveVect.x = move.x;
         moveVect.z = move.y;
 
-        Vector3 delta = moveVect * Time.fixedDeltaTime * moveSpeed;
+        Vector3 delta = moveVect * Time.fixedDeltaTime * speed;
         transform.position += delta; // might be better to rb
 
 
@@ -234,6 +256,8 @@ public class MageController : MonoBehaviour
             currentDoor.Use();
             usingDoor = false;
         }
+
+        currSpeed = speed;
     }
 
     /// ENERGY SYSTEM

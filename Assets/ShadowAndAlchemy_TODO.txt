@@ -147,6 +147,7 @@ Item stuff: (What sort of items would be good? all weapons are already one hit)
 - add enemies that the player must run away from (can't hide/must hid in specific spots)
 
 bugs: 
+- outline is incorrect on restart
 -------------------------------------------------------------------------------------------
 Sound Attribution:
 
